@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Simple brute force implementation
@@ -21,8 +23,8 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
     }
 
     @Override
-    public List<String> getSymptoms() throws IOException {
-        ArrayList<String> result = new ArrayList<String>();
+    public HashMap<String, Integer> getSymptoms() throws IOException {
+        HashMap<String, Integer> result = new HashMap<String, Integer>();
 
         if (filepath != null) {
             try {
@@ -30,7 +32,12 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
                 String line = reader.readLine();
 
                 while (line != null) {
-                    result.add(line);
+                    if (result.containsKey(line)) {
+                        int value = result.get(line) + 1;
+                        result.put(line, value);
+                    } else {
+                        result.put(line, 0);
+                    }
                     line = reader.readLine();
                 }
                 reader.close();

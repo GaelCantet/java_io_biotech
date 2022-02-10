@@ -10,7 +10,7 @@ public class AnalyticsCounter {
 		Scanner scan = new Scanner(System.in);
 		boolean isOk = false;
 		String path;
-		List<String> symptoms = new ArrayList<>();
+		HashMap<String, Integer> symptoms = new HashMap<String, Integer>();
 
 		while (!isOk) {
 			try {
@@ -26,14 +26,10 @@ public class AnalyticsCounter {
 			}
 		}
 
-		HashSet<String> uniqueSymptoms = new HashSet<String>(symptoms);
-//
 		// next generate output
 		try {
 			FileWriter writer = new FileWriter ("result.out");
-			for (String i : uniqueSymptoms) {
-				writer.write(i + " : " + Collections.frequency(symptoms, i) + "\n");
-			}
+			symptoms.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
