@@ -36,7 +36,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
                         int value = result.get(line) + 1;
                         result.put(line, value);
                     } else {
-                        result.put(line, 0);
+                        result.put(line, 1);
                     }
                     line = reader.readLine();
                 }

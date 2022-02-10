@@ -29,7 +29,9 @@ public class AnalyticsCounter {
 		// next generate output
 		try {
 			FileWriter writer = new FileWriter ("result.out");
-			symptoms.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
+			for (Map.Entry<String, Integer> entry : symptoms.entrySet()) {
+				System.out.println(entry.getKey() + " : " + entry.getValue());
+			}
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
